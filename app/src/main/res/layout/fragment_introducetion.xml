@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/texture_left"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineLeftText"
+        app:layout_constraintDimensionRatio="1:3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/ellipse"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ellips"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineEllipsetBottom"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEllipseRight"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="@id/guidelineEllipseLeft"
+        app:layout_constraintTop_toTopOf="@id/guidelineEllipsetTop"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/texture_right"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineLeftText"
+        />
+
+    <Button
+        style="@style/blueButtonStyle"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins_thin"
+        android:text="Start"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/underTextviewIntro"
+        app:layout_constraintStart_toStartOf="@id/underTextviewIntro"
+
+        app:layout_constraintTop_toBottomOf="@id/underTextviewIntro" />
+
+
+
+    <TextView
+        android:id="@+id/textviewIntrodution"
+        style="@style/TextAppearance.MaterialComponents.Headline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/textviewMargin"
+        android:text="Xin chào! \n Chúc bạn có trải nghiệm tốt."
+        android:textAlignment="center"
+        android:textColor="#0E3C98"
+        android:textSize="24sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintBottom_toBottomOf="@id/ellipse"
+        app:layout_constraintEnd_toEndOf="@id/ellipse"
+        app:layout_constraintStart_toStartOf="@+id/ellipse"
+        app:layout_constraintTop_toTopOf="@id/ellipse"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/underTextviewIntro"
+        style="@style/TextAppearance.MaterialComponents.Headline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:gravity="center"
+        android:text="Uy tín, chất lượng là hàng đầu. \n Hãy lựa chọn sản phẩm phù hợp!."
+        android:textAlignment="center"
+        android:textColor="#3C7AAC"
+        android:textSize="20sp"
+
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="@id/textviewIntrodution"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="@id/textviewIntrodution"
+        app:layout_constraintTop_toTopOf="@id/textviewIntrodution" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLeftText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEllipseLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEllipseRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEllipsetTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEllipsetBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.52"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

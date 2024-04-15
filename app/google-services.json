@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "760286862773",
+    "project_id": "appbanhang-418da",
+    "storage_bucket": "appbanhang-418da.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:760286862773:android:98ce5d0f74dfca1ec7cdfc",
+        "android_client_info": {
+          "package_name": "com.example.baitaplon"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAH_bfvgUbyz64kc7nrHCTKBLq1dgsFYcY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

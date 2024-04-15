@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/blury_background"
+        android:scaleType="centerCrop" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <TextView
+            android:id="@+id/tvAppName"
+            style="@style/h3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="120dp"
+            android:drawableStart="@drawable/ic_kleine_shape"
+            android:drawablePadding="6dp"
+            android:text="Imelda"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textviewIntrodution"
+            style="@style/h4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="65dp"
+            android:text="Xin chào! \n Chúc bạn có trải nghiệm tốt."
+            android:textAlignment="center"
+            android:textColor="#0E3C98"
+            android:textSize="24sp"
+            android:textStyle="normal|bold|italic"
+            app:layout_constraintTop_toTopOf="@id/tvAppName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/underTextviewIntro"
+            style="@style/TextAppearance.MaterialComponents.Headline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="88dp"
+            android:gravity="center"
+            android:text="Uy tín, chất lượng là hàng đầu. \n Hãy lựa chọn sản phẩm phù hợp!."
+            android:textAlignment="center"
+            android:textColor="#3C7AAC"
+            android:textSize="20sp"
+
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="@id/textviewIntrodution"
+            app:layout_constraintHorizontal_bias="0.555"
+            app:layout_constraintStart_toStartOf="@id/textviewIntrodution"
+            app:layout_constraintTop_toTopOf="@id/textviewIntrodution" />
+
+        <Button
+            android:id="@+id/buttonLogin"
+            style="@style/blueButtonStyle"
+            android:layout_width="160dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/blue_background"
+            android:text="Login"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/underTextviewIntro"
+            app:layout_constraintStart_toStartOf="@id/underTextviewIntro"
+            app:layout_constraintTop_toBottomOf="@id/underTextviewIntro"
+            app:layout_constraintVertical_bias="0.186" />
+
+        <Button
+            android:id="@+id/buttonRegister"
+            android:layout_width="160dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="20dp"
+            style="@style/whiteButtonStyle"
+            android:text="Register"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="@id/underTextviewIntro"
+            app:layout_constraintStart_toStartOf="@id/underTextviewIntro"
+            app:layout_constraintTop_toBottomOf="@id/buttonLogin"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+</FrameLayout>
