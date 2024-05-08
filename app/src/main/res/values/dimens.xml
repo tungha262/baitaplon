@@ -2,4 +2,5 @@
 <resources>
     <dimen name="textviewMargin">115</dimen>
     <dimen name="buttonCorners">5dp</dimen>
+    <dimen name="edittextHeight">60dp</dimen>
 </resources>

@@ -1,5 +1,4 @@
 package com.example.baitaplon.activity
-
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
