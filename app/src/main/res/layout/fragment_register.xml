@@ -1,6 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/blury_background"
+        android:scaleType="centerCrop"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tvAppName"
+            style="@style/h3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:drawableStart="@drawable/ic_kleine_shape"
+            android:drawablePadding="6dp"
+            android:text="@string/appName"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/guidelineRegisterLeft"
+            app:layout_constraintEnd_toEndOf="@id/guidelineRegisterRight"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tvRegister"
+            style="@style/h2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:text="Đăng ký"
+            android:textAlignment="center"
+            android:textColor="#0E3C98"
+            android:textSize="32sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@id/tvAppName"
+            app:layout_constraintStart_toStartOf="@id/guidelineRegisterLeft"
+            app:layout_constraintEnd_toEndOf="@id/guidelineRegisterRight"
+            />
+
+        <TextView
+            android:id="@+id/tvDontHaveAcc"
+            style="@style/h2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="Bạn chưa có tài khoản? Hãy đăng ký"
+            android:textColor="#3C7AAC"
+            android:textSize="16sp"
+
+            android:textStyle="normal"
+            app:layout_constraintHorizontal_bias="0.555"
+            app:layout_constraintStart_toStartOf="@id/guidelineRegisterLeft"
+            app:layout_constraintEnd_toEndOf="@id/guidelineRegisterRight"
+            app:layout_constraintTop_toTopOf="@id/tvRegister" />
+
+        <EditText
+            android:id="@+id/FirstNameRegister"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toStartOf="@id/guidelineRegisterLeft"
+            app:layout_constraintEnd_toEndOf="@id/guidelineRegisterRight"
+            app:layout_constraintTop_toBottomOf="@id/tvDontHaveAcc"
+            style="@style/editText"
+            android:hint="First Name"
+            android:inputType="textEmailAddress"
+            android:layout_marginTop="30dp"/>
+        <EditText
+            android:id="@+id/LastNameRegister"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toStartOf="@id/guidelineRegisterLeft"
+            app:layout_constraintEnd_toEndOf="@id/guidelineRegisterRight"
+            app:layout_constraintTop_toBottomOf="@id/FirstNameRegister"
+            style="@style/editText"
+            android:hint="Last Name"
+            android:inputType="textPersonName"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/edEmailRegister"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/edittextHeight"
+            app:layout_constraintStart_toStartOf="@id/guidelineRegisterLeft"
+            app:layout_constraintEnd_toEndOf="@id/guidelineRegisterRight"
+            app:layout_constraintTop_toBottomOf="@id/LastNameRegister"
+            style="@style/editText"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:layout_marginTop="10dp"/>
+        <EditText
+            android:id="@+id/edPasswordRegister"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toStartOf="@id/guidelineRegisterLeft"
+            app:layout_constraintEnd_toEndOf="@id/guidelineRegisterRight"
+            app:layout_constraintTop_toBottomOf="@id/edEmailRegister"
+            style="@style/editText"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:layout_marginTop="10dp"/>
+
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonRegisterRegister"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="35dp"
+            style="@style/blueButtonStyle"
+            android:text="Register"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@id/guidelineRegisterRight"
+            app:layout_constraintStart_toStartOf="@id/guidelineRegisterLeft"
+            app:layout_constraintTop_toBottomOf="@id/edPasswordRegister" />
+
+        <ImageView
+            android:id="@+id/facebookRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@id/guidelineRegisterLeft"
+            app:layout_constraintTop_toBottomOf="@id/buttonRegisterRegister"
+            android:src="@drawable/facebook_login"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Facebook"
+            app:layout_constraintStart_toStartOf="@id/facebookRegister"
+            app:layout_constraintEnd_toEndOf="@id/facebookRegister"
+            app:layout_constraintTop_toTopOf="@id/facebookRegister"
+            app:layout_constraintBottom_toBottomOf="@id/facebookRegister"
+            android:textSize="16dp" />
+
+        <ImageView
+            android:id="@+id/googleRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@id/guidelineRegisterRight"
+            app:layout_constraintTop_toBottomOf="@id/buttonRegisterRegister"
+            android:src="@drawable/google_login"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Google"
+            app:layout_constraintStart_toStartOf="@id/googleRegister"
+            app:layout_constraintEnd_toEndOf="@id/googleRegister"
+            app:layout_constraintTop_toTopOf="@id/googleRegister"
+            app:layout_constraintBottom_toBottomOf="@id/googleRegister"
+            android:textSize="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineRegisterLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.09"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineRegisterRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.91" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
