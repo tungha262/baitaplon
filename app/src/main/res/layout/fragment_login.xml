@@ -59,7 +59,7 @@
         <EditText
             android:id="@+id/edEmailLogin"
             android:layout_width="0dp"
-            android:layout_height="@dimen/edittextHeight"
+            android:layout_height="60dp"
             app:layout_constraintStart_toStartOf="@id/guidelineLoginLeft"
             app:layout_constraintEnd_toEndOf="@id/guidelineLoginRight"
             app:layout_constraintTop_toBottomOf="@id/tvDontHaveAcc"
@@ -70,7 +70,7 @@
         <EditText
             android:id="@+id/edPasswordLogin"
             android:layout_width="0dp"
-            android:layout_height="@dimen/edittextHeight"
+            android:layout_height="60dp"
             app:layout_constraintStart_toStartOf="@id/guidelineLoginLeft"
             app:layout_constraintEnd_toEndOf="@id/guidelineLoginRight"
             app:layout_constraintTop_toBottomOf="@id/edEmailLogin"
@@ -95,7 +95,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonLoginLogin"
             android:layout_width="0dp"
-            android:layout_height="55dp"
+            android:layout_height="60dp"
             android:layout_marginTop="20dp"
             style="@style/blueButtonStyle"
             android:text="Login"
