@@ -12,12 +12,9 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-<<<<<<< HEAD
         app:defaultNavHost="true"
         app:navGraph="@navigation/login_register_graph" />
-=======
-        android:src="@drawable/blury_background"
-        android:scaleType="centerCrop"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
