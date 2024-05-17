@@ -17,8 +17,11 @@ import kotlinx.coroutines.launch
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.baitaplon.data.User
+import com.example.baitaplon.util.RegisterValidation
 import com.example.baitaplon.util.Resource
 import com.google.android.material.button.MaterialButton
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 private val TAG = "RegisterFragment"
 @AndroidEntryPoint
@@ -66,7 +69,42 @@ class RegisterFragment : Fragment() {
                         biding.buttonRegisterRegister.revertAnimation()
                     }
                     else -> Unit
-
+                }
+            }
+        }
+        lifecycleScope.launchWhenStarted {
+            viewModel.validation.collect { validation ->
+                if (validation.email is RegisterValidation.Failed) {
+                    withContext(Dispatchers.Main) {
+                        biding.edEmailRegister.apply {
+                            requestFocus()
+                            error = validation.email.message
+                        }
+                    }
+                }
+                if (validation.password is RegisterValidation.Failed) {
+                    withContext(Dispatchers.Main) {
+                        biding.edPasswordRegister.apply {
+                            requestFocus()
+                            error = validation.password.message
+                        }
+                    }
+                }
+                if(validation.firstName is RegisterValidation.Failed){
+                    withContext(Dispatchers.Main) {
+                        biding.FirstNameRegister.apply {
+                            requestFocus()
+                            error = validation.firstName.message
+                        }
+                    }
+                }
+                if(validation.lastName is RegisterValidation.Failed){
+                    withContext(Dispatchers.Main) {
+                        biding.LastNameRegister.apply {
+                            requestFocus()
+                            error = validation.lastName.message
+                        }
+                    }
                 }
             }
         }
