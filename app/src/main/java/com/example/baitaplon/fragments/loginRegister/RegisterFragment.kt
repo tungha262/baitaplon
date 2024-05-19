@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.baitaplon.R
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
 
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.baitaplon.data.User
 import com.example.baitaplon.util.RegisterValidation
 import com.example.baitaplon.util.Resource
@@ -41,6 +43,9 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        biding.tvDoHaveAcc.setOnClickListener {
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        }
 
 
         biding.apply {
@@ -62,6 +67,7 @@ class RegisterFragment : Fragment() {
                     }
                     is Resource.Success -> {
                         Log.d("test", it.message.toString())
+                        Toast.makeText(context, "Đăng ký thành công", Toast.LENGTH_SHORT).show()
                         biding.buttonRegisterRegister.revertAnimation()
                     }
                     is Resource.Error -> {
