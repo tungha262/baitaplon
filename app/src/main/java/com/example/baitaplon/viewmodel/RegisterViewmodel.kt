@@ -49,7 +49,7 @@ class RegisterViewmodel @Inject constructor(
                 .addOnSuccessListener {
                     it.user?.let {
                         _register.value = Resource.Success(it)
-                        registerAccount(user.email, password)
+                        registerAccount(firstName = user.firstName, lastName = user.lastName,user.email, password)
                     }
                 }
                 .addOnFailureListener {
@@ -77,12 +77,13 @@ class RegisterViewmodel @Inject constructor(
                     && firstNamevalidation is RegisterValidation.Success && lastNamevalidation is RegisterValidation.Success
         return shouldRegister
     }
-    private fun registerAccount(username: String, password: String) {
+    private fun registerAccount(firstName: String, lastName: String,email: String, password: String) {
         val client = OkHttpClient()
         val jsonObject = JsonObject()
-        jsonObject.addProperty("account", username)
+        jsonObject.addProperty("firstName", firstName)
+        jsonObject.addProperty("lastName", lastName)
+        jsonObject.addProperty("email", email)
         jsonObject.addProperty("password", password)
-
         val requestBody = jsonObject.toString().toRequestBody("application/json".toMediaType())
 
         val request = Request.Builder()
