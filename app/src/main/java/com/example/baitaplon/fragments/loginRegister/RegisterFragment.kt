@@ -11,8 +11,7 @@ import com.example.baitaplon.R
 import com.example.baitaplon.databinding.FragmentRegisterBinding
 import com.example.baitaplon.viewmodel.RegisterViewmodel
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.Bidi
-import kotlinx.coroutines.launch
+import android.text.Html
 
 
 import androidx.activity.viewModels
@@ -43,6 +42,8 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val formattedText = "Bạn đã có tài khoản? Hãy <u><b>đăng nhập</b></u>"
+        biding.tvDoHaveAcc.text = Html.fromHtml(formattedText, Html.FROM_HTML_MODE_LEGACY)
         biding.tvDoHaveAcc.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }

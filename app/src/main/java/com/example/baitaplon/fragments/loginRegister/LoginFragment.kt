@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.whenCreated
 import androidx.navigation.fragment.findNavController
 import com.example.baitaplon.R
 import com.example.baitaplon.activity.ShoppingActivity
@@ -17,7 +16,7 @@ import com.example.baitaplon.databinding.FragmentLoginBinding
 import com.example.baitaplon.util.Resource
 import com.example.baitaplon.viewmodel.LoginViewmodel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
+import android.text.Html
 
 @AndroidEntryPoint
 class LoginFragment : Fragment(R.layout.fragment_login) {
@@ -35,6 +34,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val formattedText = "Bạn chưa có tài khoản? Hãy <u><b>đăng ký</b></u>"
+        binding.tvDontHaveAcc.text = Html.fromHtml(formattedText, Html.FROM_HTML_MODE_LEGACY)
         binding.tvDontHaveAcc.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
