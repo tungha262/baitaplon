@@ -50,9 +50,7 @@
             android:text="Bạn chưa có tài khoản? Hãy đăng ký"
             android:textColor="#3C7AAC"
             android:textSize="16sp"
-
             android:textStyle="normal"
-            app:layout_constraintHorizontal_bias="0.555"
             app:layout_constraintStart_toStartOf="@id/guidelineLoginLeft"
             app:layout_constraintTop_toTopOf="@id/tvLogin" />
 

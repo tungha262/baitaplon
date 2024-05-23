@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.baitaplon.R
 import com.example.baitaplon.adapter.HomeViewpagerAdapter
+import com.example.baitaplon.adapter.ProductAdapter
 import com.example.baitaplon.databinding.FragmentHomeBinding
 import com.example.baitaplon.fragments.categories.AcerFragment
 import com.example.baitaplon.fragments.categories.AsusFragment
@@ -14,12 +15,14 @@ import com.example.baitaplon.fragments.categories.DellFragment
 import com.example.baitaplon.fragments.categories.MacBookFragment
 import com.example.baitaplon.fragments.categories.MainCategoryFragment
 import com.example.baitaplon.fragments.categories.MsiFragment
+import com.example.baitaplon.productController.ProductManager
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private  lateinit var  binding : FragmentHomeBinding
-
+    private lateinit var productAdapter: ProductAdapter
+    private lateinit var productManager: ProductManager
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,12 +48,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.viewpagerHome.adapter= viewPage2Adapter
         TabLayoutMediator(binding.tablayout, binding.viewpagerHome){tab, position ->
             when (position) {
-                0 -> tab.text= "MacBook"
-                1 -> tab.text= "MSI"
-                2 -> tab.text= "Dell"
-                3 -> tab.text= "Asus"
-                4 -> tab.text= "Acer"
-                5 -> tab.text= "HP"
+                0 -> tab.text= "All"
+                1 -> tab.text= "MacBook"
+                2 -> tab.text= "MSI"
+                3 -> tab.text= "Dell"
+                4 -> tab.text= "Asus"
+                5 -> tab.text= "Acer"
+
             }
         }.attach()
     }

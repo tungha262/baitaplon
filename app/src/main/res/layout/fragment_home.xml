@@ -74,11 +74,10 @@
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tablayout"
+        app:layout_constraintTop_toBottomOf="@id/tablayout"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 <!--    phần bổ sung-->
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
