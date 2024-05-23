@@ -1,4 +1,4 @@
 package com.example.baitaplon.fragments.categories
 
-class Asus {
+class AsusFragment :BaseCategoryFragment() {
 }

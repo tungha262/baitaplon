@@ -1,4 +1,7 @@
 package com.example.baitaplon.fragments.categories
 
-class BaseCatogoryFragment {
+import androidx.fragment.app.Fragment
+import com.example.baitaplon.R
+
+open class BaseCategoryFragment : Fragment(R.layout.fragment_base_category){
 }

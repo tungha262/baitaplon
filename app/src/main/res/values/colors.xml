@@ -24,5 +24,6 @@
     <color name="g_orange_yellow">#F8BA00</color>
     <color name="g_green">#11FF00</color>
     <color name="g_gray">#D3D3D3</color>
-
+    <color name="g_blue_gray201">#f2f2f2</color>
+    <color name="navy_blue">#000080 </color>
 </resources>

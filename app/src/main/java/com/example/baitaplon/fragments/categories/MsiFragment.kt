@@ -1,4 +1,4 @@
 package com.example.baitaplon.fragments.categories
 
-class MsiFragment {
+class MsiFragment :BaseCategoryFragment() {
 }
