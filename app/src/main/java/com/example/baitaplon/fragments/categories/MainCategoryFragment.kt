@@ -21,6 +21,7 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category){
     private lateinit var productManager: ProductManager
     private lateinit var filteredProduct: ArrayList<Product>
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -50,7 +51,6 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category){
                 filteredProduct.addAll(products)
                 adt.notifyDataSetChanged()
             }
-
             override fun onLoadError(error: VolleyError) {
                 showLoading()
                 Log.e("MainCategoryFragment", "Error loading products: ${error.message}")

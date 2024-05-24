@@ -1,4 +1,4 @@
-@file:Suppress("UNUSED_EXPRESSION")
+
 
 plugins {
     alias(libs.plugins.androidApplication)
@@ -18,7 +18,6 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -68,6 +67,12 @@ dependencies {
 
     //Firebase coroutines
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1")
+
+    // fire store
+    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
+    implementation("com.google.firebase:firebase-firestore:25.0.0")
+    implementation("com.google.firebase:firebase-analytics:22.0.0")
+
 
 
     // dapper hilt

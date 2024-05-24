@@ -39,7 +39,6 @@ class RegisterFragment : Fragment() {
         return biding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val formattedText = "Bạn đã có tài khoản? Hãy <u><b>đăng nhập</b></u>"
