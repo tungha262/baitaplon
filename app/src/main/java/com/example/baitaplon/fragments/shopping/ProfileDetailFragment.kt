@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.baitaplon.R
@@ -40,7 +41,7 @@ class ProfileDetailFragment : Fragment() {
             binding.tvEmail.text = it.email
         }
 
-        val backButton = view.findViewById<ImageView>(R.id.backButton)
+        val backButton = view.findViewById<LinearLayout>(R.id.back_to_home_button)
 
         // Thiết lập OnClickListener cho ImageView
         backButton.setOnClickListener {

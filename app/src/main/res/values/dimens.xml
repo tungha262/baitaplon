@@ -3,4 +3,8 @@
     <dimen name="textviewMargin">115dp</dimen>
     <dimen name="buttonCorners">5dp</dimen>
     <dimen name="edittextHeight">60dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="headerTextSize">28sp</dimen>
 </resources>
