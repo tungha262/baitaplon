@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.baitaplon.R
 import com.example.baitaplon.databinding.ActivityShoppingBinding
+import com.example.baitaplon.productController.UserManager
 
 class ShoppingActivity : AppCompatActivity() {
 
@@ -31,5 +32,9 @@ class ShoppingActivity : AppCompatActivity() {
             insets
         }
 
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        UserManager.clearCurrentUser()
     }
 }

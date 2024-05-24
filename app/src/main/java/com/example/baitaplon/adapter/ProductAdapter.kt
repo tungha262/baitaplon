@@ -10,7 +10,10 @@ import com.example.baitaplon.R
 import com.example.baitaplon.data.Product
 import com.squareup.picasso.Picasso
 
-class ProductAdapter(private var productList: List<Product>) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+class ProductAdapter(
+    private val productList: List<Product>,
+    private val onItemClick: (Product) -> Unit
+) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.product_item, parent, false)
@@ -20,6 +23,9 @@ class ProductAdapter(private var productList: List<Product>) : RecyclerView.Adap
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = productList[position]
         holder.bind(product)
+        holder.itemView.setOnClickListener {
+            onItemClick(product)
+        }
     }
 
     override fun getItemCount() = productList.size
@@ -32,15 +38,11 @@ class ProductAdapter(private var productList: List<Product>) : RecyclerView.Adap
         fun bind(product: Product) {
             Picasso.get().load(product.imageLink).into(productImage)
             productName.text = product.productName
-            val formatPrice = product.price.formatPrice()
+            val formatPrice = product.price?.formatPrice()
             productPrice.text = formatPrice
         }
-
     }
-
-
 }
-
 private fun Int?.formatPrice(): String {
     val price = this.toString()
     val stringBuilder = StringBuilder()

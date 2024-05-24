@@ -1,5 +1,6 @@
 package com.example.baitaplon.fragments.categories
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.VolleyError
 import com.example.baitaplon.R
+import com.example.baitaplon.activity.ProductDetail
 import com.example.baitaplon.adapter.ProductAdapter
 import com.example.baitaplon.data.Product
 import com.example.baitaplon.databinding.FragmentMainCategoryBinding
@@ -35,7 +37,9 @@ class AsusFragment : Fragment(R.layout.fragment_main_category){
         val recyclerView: RecyclerView = binding.recyclerViewProducts1
         val layoutManager = GridLayoutManager(requireContext(), 1)
         filteredProduct = ArrayList()
-        adt = ProductAdapter(filteredProduct)
+        adt = ProductAdapter(filteredProduct) { product ->
+            showProductDetail(product)
+        }
         recyclerView.setAdapter(adt)
         recyclerView.layoutManager = layoutManager
         productManager = ProductManager(requireContext())
@@ -66,5 +70,9 @@ class AsusFragment : Fragment(R.layout.fragment_main_category){
         binding.progressBar.visibility = View.VISIBLE
     }
 
-
+    private fun showProductDetail(product: Product) {
+        val intent = Intent(requireContext(), ProductDetail::class.java)
+        intent.putExtra("product", product)
+        startActivity(intent)
+    }
 }
