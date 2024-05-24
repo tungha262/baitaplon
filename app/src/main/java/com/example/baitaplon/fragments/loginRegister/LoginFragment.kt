@@ -17,12 +17,18 @@ import com.example.baitaplon.util.Resource
 import com.example.baitaplon.viewmodel.LoginViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import android.text.Html
+import android.util.Log
+import com.android.volley.VolleyError
+import com.example.baitaplon.Server.ServerService
+import com.example.baitaplon.data.User
+import com.example.baitaplon.productController.UserManager
+import org.json.JSONObject
 
 @AndroidEntryPoint
 class LoginFragment : Fragment(R.layout.fragment_login) {
     private lateinit var binding: FragmentLoginBinding
     private val viewModel by viewModels<LoginViewmodel>()
-
+    private var email: String = ""
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,7 +48,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         binding.apply {
             buttonLoginLogin.setOnClickListener {
-                val email = edEmailLogin.text.toString().trim()
+                email = edEmailLogin.text.toString().trim()
                 val password = edPasswordLogin.text.toString()
                 viewModel.login(email, password)
             }
@@ -54,6 +60,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                         binding.buttonLoginLogin.startAnimation()
                     }
                     is Resource.Success -> {
+                        getUserDataByEmail(email)
                         binding.buttonLoginLogin.revertAnimation()
                         Toast.makeText(context, "Đăng nhập thành công", Toast.LENGTH_SHORT).show()
                         Intent(requireActivity(), ShoppingActivity::class.java).also { intent ->
@@ -71,4 +78,20 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
 
         }
+    fun getUserDataByEmail(email: String) {
+        // Gọi hàm truy vấn từ server để lấy thông tin người dùng
+        val serverService = ServerService(requireContext())
+        serverService.getAccountByEmail(email, object : ServerService.ServerCallback{
+            override fun onSuccess(response: JSONObject) {
+                val firstName = response.getString("firstName")
+                val lastName = response.getString("lastName")
+                val email = response.getString("email")
+                UserManager.setCurrentUser(User(firstName, lastName, email))
+                Log.d("Ok", "Alo Alo")
+            }
+            override fun onError(error: VolleyError) {
+                Log.e("Ngu", "Khong get duoc data")
+            }
+        })
     }
+}

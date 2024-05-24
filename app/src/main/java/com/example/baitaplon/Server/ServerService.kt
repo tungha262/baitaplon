@@ -17,6 +17,7 @@ class ServerService(context: Context) {
     private val API_URL = "https://serveruddd.onrender.com/api/"
     private val insertAccount = "insertaccount"
     private val getProduct = "product"
+    private val getAccountByEmailStr = "getAccountByEmail/"
     private val requestQueue: RequestQueue = Volley.newRequestQueue(context)
     fun createAccount(postData: JSONObject, callback: ServerCallback){
         val url = API_URL + insertAccount
@@ -58,7 +59,25 @@ class ServerService(context: Context) {
     }
 
 
-
+    //Lay du lieu nguoi dung bang email
+    fun getAccountByEmail(email: String, callback: ServerCallback) {
+        val url = "$API_URL$getAccountByEmailStr$email"
+        val jsonObjectRequest = object : JsonObjectRequest(
+            Method.GET, url, null,
+            Response.Listener { response ->
+                callback.onSuccess(response)
+            },
+            Response.ErrorListener { error ->
+                callback.onError(error)
+                Log.e(TAG, "Error: ${error.toString()}")
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): MutableMap<String, String> {
+                return mutableMapOf("Content-Type" to "application/json")
+            }
+        }
+        requestQueue.add(jsonObjectRequest)
+    }
     interface ServerCallback {
         fun onSuccess(response: JSONObject)
         fun onError(error: VolleyError)
