@@ -43,7 +43,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         binding.constraintProfile.setOnClickListener {
 
-            val user = UserManager.getCurrentUser()
+            val user = userManager.getCurrentUser()
             val bundle = Bundle()
             bundle.putParcelable("user", user)
             findNavController().navigate(R.id.action_profileFragment_to_profileDetailFragment, bundle)

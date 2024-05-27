@@ -37,4 +37,5 @@ class ShoppingActivity : AppCompatActivity() {
         super.onDestroy()
         UserManager.clearCurrentUser()
     }
+
 }

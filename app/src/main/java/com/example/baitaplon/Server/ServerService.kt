@@ -17,7 +17,9 @@ class ServerService(context: Context) {
     private val API_URL = "https://serveruddd.onrender.com/api/"
     private val insertAccount = "insertaccount"
     private val getProduct = "product"
-    private val getAccountByEmailStr = "getAccountByEmail/"
+    private val getAccountByEmailStr = "getAccountByEmail"
+    private val addToCartEndpoint = "add_to_shopping_cart"
+    private val getProductByEmail = "getProductByEmail"
     private val requestQueue: RequestQueue = Volley.newRequestQueue(context)
     fun createAccount(postData: JSONObject, callback: ServerCallback){
         val url = API_URL + insertAccount
@@ -61,7 +63,7 @@ class ServerService(context: Context) {
 
     //Lay du lieu nguoi dung bang email
     fun getAccountByEmail(email: String, callback: ServerCallback) {
-        val url = "$API_URL$getAccountByEmailStr$email"
+        val url = "$API_URL$getAccountByEmailStr/$email"
         val jsonObjectRequest = object : JsonObjectRequest(
             Method.GET, url, null,
             Response.Listener { response ->
@@ -78,6 +80,58 @@ class ServerService(context: Context) {
         }
         requestQueue.add(jsonObjectRequest)
     }
+
+    fun addToCart(productId: Int, email: String, token: String, callback: ServerCallback) {
+        val url = API_URL + addToCartEndpoint
+
+        // Tạo đối tượng JSONObject chứa dữ liệu cần gửi đi
+        val postData = JSONObject().apply {
+            put("productID", productId)
+            put("email", email)
+            put("token", token)
+        }
+
+        // Tạo request
+        val jsonObjectRequest = object : JsonObjectRequest(
+            Method.POST, url, postData,
+            Response.Listener { response ->
+                callback.onSuccess(response)
+            },
+            Response.ErrorListener { error ->
+                callback.onError(error)
+                Log.e(TAG, "Error: ${error.toString()}")
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): MutableMap<String, String> {
+                return mutableMapOf("Content-Type" to "application/json")
+            }
+        }
+
+        // Thêm request vào hàng đợi
+        requestQueue.add(jsonObjectRequest)
+    }
+
+    fun getProductByEmail(email: String, callback: ServerCallbackArray) {
+        val url = "$API_URL$getProductByEmail/$email"
+        val jsonArrayRequest = object : JsonArrayRequest(
+            Method.GET, url, null,
+            Response.Listener { response ->
+                callback.onSuccess(response)
+            },
+            Response.ErrorListener { error ->
+                callback.onError(error)
+                Log.e(TAG, "Error: ${error.toString()}")
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): MutableMap<String, String> {
+                return mutableMapOf("Content-Type" to "application/json")
+            }
+        }
+        requestQueue.add(jsonArrayRequest)
+    }
+
+
+
     interface ServerCallback {
         fun onSuccess(response: JSONObject)
         fun onError(error: VolleyError)

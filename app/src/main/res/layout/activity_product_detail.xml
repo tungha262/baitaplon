@@ -20,6 +20,18 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <!-- Nút X để quay lại -->
+            <ImageView
+                android:id="@+id/btn_close"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/ic_close"
+                android:contentDescription="Close"
+                android:layout_marginBottom="8dp"
+                />
+
             <ImageView
                 android:id="@+id/product_Image"
                 android:layout_width="match_parent"
@@ -66,11 +78,10 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="#E30019"
                     android:textSize="24sp"
-                    android:textStyle="bold" /> <!-- Điều chỉnh khoảng cách giữa giá tiền và chữ "đ" nếu cần -->
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
-            <!-- Thêm các TextView cho năm sản xuất và mô tả -->
             <TextView
                 android:id="@+id/product_year_of_manufacture"
                 android:layout_width="match_parent"
@@ -91,7 +102,6 @@
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
 
-            <!-- Button "Add to cart" -->
             <Button
                 android:id="@+id/btn_add_to_cart"
                 android:layout_width="match_parent"
@@ -100,8 +110,6 @@
                 android:text="Add to Cart"
                 android:backgroundTint="#E30019"
                 android:textColor="@android:color/white" />
-
-            <!-- Button "Back to Home" -->
 
         </LinearLayout>
 
