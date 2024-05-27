@@ -92,6 +92,7 @@ class CartFragment : Fragment(), CartAdapter.CartListener {
         if (product.quantity == 0) {
             cartItems.remove(product)
         }
+        updateTotalPrice()
         if (cartItems.isEmpty()) {
             emptyCartLayout.visibility = View.VISIBLE
             listView.visibility = View.GONE
@@ -99,7 +100,7 @@ class CartFragment : Fragment(), CartAdapter.CartListener {
             emptyCartLayout.visibility = View.GONE
             listView.visibility = View.VISIBLE
         }
-        updateTotalPrice()
+
         cartAdapter.notifyDataSetChanged()
     }
 

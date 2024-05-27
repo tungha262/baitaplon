@@ -20,6 +20,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
+        userManager = UserManager
     }
 
     override fun onCreateView(

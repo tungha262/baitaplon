@@ -78,11 +78,7 @@ class CartAdapter(private val context: Context, private val products: MutableLis
             serverService.removeProductByID(it, object : ServerService.ServerCallback {
                 override fun onSuccess(response: JSONObject) {
                     Log.d("CartAdapter", "Product removed: $response")
-                    product.quantity = product.quantity!! - 1
-                    if (product.quantity == 0) {
-                        products.remove(product)
-                        listener?.onProductRemoved(product)
-                    }
+                    listener?.onProductRemoved(product)
                     notifyDataSetChanged()
                 }
 
