@@ -1,15 +1,20 @@
 package com.example.baitaplon.activity
 
 import android.annotation.SuppressLint
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.baitaplon.R
 import com.example.baitaplon.data.Product
+import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 
 class ProductDetail : AppCompatActivity() {
@@ -20,6 +25,8 @@ class ProductDetail : AppCompatActivity() {
     private lateinit var productName : TextView
     private lateinit var productYearOfManufacture : TextView
     private lateinit var productDescription : TextView
+    private lateinit var btnAddToCart : Button
+    private lateinit var btnClose: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +43,18 @@ class ProductDetail : AppCompatActivity() {
         productName = findViewById(R.id.product_name)
         productYearOfManufacture = findViewById(R.id.product_year_of_manufacture)
         productDescription = findViewById(R.id.product_description)
+        btnAddToCart = findViewById(R.id.btn_add_to_cart)
+        btnClose = findViewById(R.id.btn_close)
+
+        btnClose.setOnClickListener {
+            finish()
+        }
         product?.let {
             displayProductDetails(it)
+            btnAddToCart.setOnClickListener {
+                // TODO: Add product to cart
+                addToCart(product)
+            }
         }
     }
 
@@ -47,9 +64,16 @@ class ProductDetail : AppCompatActivity() {
         val formatPrice = product.price?.formatPrice()
         productPrice.text = formatPrice
         productYearOfManufacture.text = "Năm sản xuất: ${product.yearOfManufacture}"
-        productDescription.text = "${product.description}\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae lacus vel velit gravida tristique. Fusce facilisis, ipsum ut placerat viverra, metus justo tincidunt justo, non scelerisque sem ex a libero. Duis pharetra, magna in auctor vehicula, libero odio volutpat urna, sit amet cursus nisi velit non libero. Quisque tempor dui sit amet libero tincidunt, sed congue neque efficitur. Nam posuere vestibulum elit, id lobortis neque vestibulum in. Integer auctor tortor id suscipit scelerisque. Vivamus eget volutpat dui. Pellentesque sit amet orci ut purus consequat eleifend.\n" +
-                "\n" +
-                "Sed vestibulum, velit non malesuada tincidunt, erat risus auctor est, nec vestibulum magna lorem eget libero. Curabitur sit amet tortor nisl. Fusce id nibh et elit interdum ultricies. Ut auctor neque ut leo tempus, in suscipit erat porttitor. Mauris at ullamcorper est. Nullam fringilla vehicula orci, ac vehicula eros tincidunt sed. Aenean tristique, erat sed cursus tincidunt, justo leo facilisis orci, sit amet aliquam dui magna id augue.\n"
+        productDescription.text = "${product.description}\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae lacus vel velit gravida tristique. Fusce facilisis, ipsum ut placerat viverra, metus justo tincidunt justo, non scelerisque sem ex a libero. Duis pharetra, magna in auctor vehicula, libero odio volutpat urna, sit amet cursus nisi velit non libero. Quisque tempor dui sit amet libero tincidunt, sed congue neque efficitur. Nam posuere vestibulum elit, id lobortis neque vestibulum in. Integer auctor tortor id suscipit scelerisque. Vivamus eget volutpat dui. Pellentesque sit amet orci ut purus consequat eleifend.\n"
+    }
+    private fun addToCart(product: Product) {
+        val sharedPreferences: SharedPreferences = getSharedPreferences("Cart", MODE_PRIVATE)
+        val productJson = Gson().toJson(product)
+        sharedPreferences.edit {
+            putString(product.productName, productJson)
+            apply()
+        }
+        Toast.makeText(this, "Add to cart successfully", Toast.LENGTH_SHORT).show()
     }
 }
 
