@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.baitaplon.R
@@ -34,7 +35,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val user = userManager.getCurrentUser()
+        var userName : TextView = binding.tvUserName
+        if (user != null) {
+            userName.text = user.firstName + " " + user.lastName
+        }
         binding.logout.setOnClickListener {
             val intent = Intent(mContext, LoginRegisterActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -43,8 +48,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
 
         binding.constraintProfile.setOnClickListener {
-
-            val user = userManager.getCurrentUser()
             val bundle = Bundle()
             bundle.putParcelable("user", user)
             findNavController().navigate(R.id.action_profileFragment_to_profileDetailFragment, bundle)
