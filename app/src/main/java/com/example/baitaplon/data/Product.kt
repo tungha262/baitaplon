@@ -9,7 +9,8 @@ class Product(
     var price: Int? = null,
     var brand: String? = null,
     var yearOfManufacture: Int? = null,
-    var description: String? = null
+    var description: String? = null,
+    var quantity: Int? = 1
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readValue(Int::class.java.classLoader) as? Int,

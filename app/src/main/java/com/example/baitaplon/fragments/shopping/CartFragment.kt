@@ -22,8 +22,9 @@ import com.google.gson.Gson
 import com.example.baitaplon.productController.UserManager
 import org.json.JSONArray
 import org.json.JSONException
+import org.json.JSONObject
 
-class CartFragment : Fragment() {
+class CartFragment : Fragment(), CartAdapter.CartListener {
 
     private lateinit var listView: ListView
     private lateinit var totalPriceTextView: TextView
@@ -32,8 +33,9 @@ class CartFragment : Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
     private var cartItems: MutableList<Product> = mutableListOf()
     private lateinit var cartClose: ImageView
-    private lateinit var userManager : UserManager
-    private lateinit var serverService : ServerService
+    private lateinit var userManager: UserManager
+    private lateinit var serverService: ServerService
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,10 +53,8 @@ class CartFragment : Fragment() {
         cartClose = view.findViewById(R.id.imageCloseCart)
 
         sharedPreferences = requireActivity().getSharedPreferences("Cart", android.content.Context.MODE_PRIVATE)
-//        loadCartItems()
         setupListView()
         updateTotalPrice()
-
 
         cartClose.setOnClickListener {
             requireActivity().onBackPressed()
@@ -80,12 +80,17 @@ class CartFragment : Fragment() {
         return view
     }
 
-    private fun loadCartItems() {
-        val allEntries = sharedPreferences.all
-        cartItems.clear()
-        for ((_, value) in allEntries) {
-            val product = Gson().fromJson(value as String, Product::class.java)
-            cartItems.add(product)
+    private fun setupListView() {
+        cartAdapter = CartAdapter(requireContext(), cartItems)
+        cartAdapter.setCartListener(this) // Đăng ký listener
+        listView.adapter = cartAdapter
+    }
+
+    override fun onProductRemoved(product: Product) {
+        // Xử lý khi sản phẩm bị xoá
+        product.quantity = product.quantity!! - 1
+        if (product.quantity == 0) {
+            cartItems.remove(product)
         }
         if (cartItems.isEmpty()) {
             emptyCartLayout.visibility = View.VISIBLE
@@ -94,18 +99,45 @@ class CartFragment : Fragment() {
             emptyCartLayout.visibility = View.GONE
             listView.visibility = View.VISIBLE
         }
+        updateTotalPrice()
+        cartAdapter.notifyDataSetChanged()
     }
 
-    private fun setupListView() {
-        cartAdapter = CartAdapter(requireContext(), cartItems)
-        listView.adapter = cartAdapter
+    override fun onProductQuantityChanged(product: Product, quantity: Int) {
+        // Xử lý khi số lượng sản phẩm thay đổi
+        product.quantity = quantity
+        Log.d("Quantity", quantity.toString())
+        updateTotalPrice()
+        addToCart(product)
+        cartAdapter.notifyDataSetChanged()
     }
 
     private fun updateTotalPrice() {
-        val totalPrice = cartItems.sumBy { it.price ?: 0 }
+        var totalPrice = 0
+        for (product in cartItems) {
+            totalPrice += product.price!! * product.quantity!!
+        }
         totalPriceTextView.text = totalPrice.formatPrice()
     }
+    private fun addToCart(product: Product) {
 
+        val currentUser = userManager.getCurrentUser()
+        val email = currentUser?.email ?: ""
+        val token = "" // Token mặc định, bạn có thể thay đổi nếu cần
+        Log.d("ProductID", product.id.toString())
+        Log.d("Email", email)
+        serverService.addToCart(product.id ?: 0, email, token, object : ServerService.ServerCallback {
+            override fun onSuccess(response: JSONObject) {
+                // Xử lý khi thêm vào giỏ hàng thành công
+                Log.d("Add to Cart", "Success: $response")
+            }
+
+            override fun onError(error: VolleyError) {
+                // Xử lý khi thất bại
+                Log.e("Add to Cart", "Error: ${error.toString()}")
+            }
+        })
+    }
 
     private fun handleCartItemsResponse(response: JSONArray) {
         try {
@@ -121,8 +153,10 @@ class CartFragment : Fragment() {
                     price = jsonObject.getInt("price"),
                     brand = jsonObject.getString("brand"),
                     yearOfManufacture = jsonObject.getInt("yearOfManufacture"),
-                    description = jsonObject.getString("description")
+                    description = jsonObject.getString("description"),
+                    quantity = jsonObject.getInt("quantity")
                 )
+
                 cartItems.add(product)
             }
             // Cập nhật giao diện người dùng
@@ -137,7 +171,6 @@ class CartFragment : Fragment() {
             updateTotalPrice() // Cập nhật tổng giá
         } catch (e: JSONException) {
             // Xử lý ngoại lệ nếu có lỗi khi phân tích dữ liệu JSON
-//            Toast.makeText(requireContext(), "Error parsing JSON", Toast.LENGTH_SHORT).show()
             Log.e("CartFragment", "JSON parsing error: ${e.message}")
         }
     }
@@ -157,4 +190,5 @@ class CartFragment : Fragment() {
         }
         return stringBuilder.reverse().toString()
     }
+
 }
