@@ -23,6 +23,7 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category){
     private lateinit var productManager: ProductManager
     private lateinit var filteredProduct: ArrayList<Product>
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,12 +41,11 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category){
         adt = ProductAdapter(filteredProduct) { product ->
             showProductDetail(product)
         }
-        recyclerView.adapter = adt
+        recyclerView.setAdapter(adt)
         recyclerView.layoutManager = layoutManager
         productManager = ProductManager(requireContext())
         loadProducts()
     }
-
     private fun loadProducts() {
         productManager.getProducts(object : ProductManager.ProductCallback {
             override fun onProductsLoaded(products: List<Product>) {
@@ -61,19 +61,19 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category){
             }
         })
     }
-
-    private fun hideLoading(){
-        binding.progressBar.visibility = View.GONE
-    }
-
-    private fun showLoading(){
-        binding.progressBar.visibility = View.VISIBLE
-    }
-
     private fun showProductDetail(product: Product) {
         val intent = Intent(requireContext(), ProductDetail::class.java)
         intent.putExtra("product", product)
         startActivity(intent)
     }
+
+    private fun hideLoading(){
+        binding.progressBar.visibility = View.GONE
+    }
+    private fun showLoading(){
+        binding.progressBar.visibility = View.VISIBLE
+    }
+
+
 }
 

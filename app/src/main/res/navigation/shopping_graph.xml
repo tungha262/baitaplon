@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.example.baitaplon.fragments.shopping.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_productDetails"
+            app:destination="@id/productDetails" />
+    </fragment>
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.baitaplon.fragments.shopping.CartFragment"
@@ -29,4 +33,9 @@
         android:name="com.example.baitaplon.fragments.shopping.ProfileDetailFragment"
         android:label="fragment_profile_detail"
         tools:layout="@layout/fragment_profile_detail" />
+    <fragment
+        android:id="@+id/productDetails"
+        android:name="com.example.baitaplon.fragments.shopping.ProductDetails"
+        android:label="ProductDetails"
+        tools:layout="@layout/fragment_product_details"/>
 </navigation>

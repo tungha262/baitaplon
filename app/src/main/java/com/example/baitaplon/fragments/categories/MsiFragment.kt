@@ -62,7 +62,6 @@ class MsiFragment : Fragment(R.layout.fragment_main_category){
             }
         })
     }
-
     private fun hideLoading(){
         binding.progressBar.visibility = View.GONE
     }
@@ -74,5 +73,4 @@ class MsiFragment : Fragment(R.layout.fragment_main_category){
         intent.putExtra("product", product)
         startActivity(intent)
     }
-
 }

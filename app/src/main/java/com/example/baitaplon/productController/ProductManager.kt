@@ -21,11 +21,9 @@ class ProductManager(private val context: Context) {
                 callback.onLoadError(error)
             }
         }
-
         // Request products from server
         serverService.getProducts(serverCallbackArray)
     }
-
     // Parse JSON response to list of Product objects
     private fun parseProducts(jsonArray: JSONArray): List<Product> {
         val productList = mutableListOf<Product>()
