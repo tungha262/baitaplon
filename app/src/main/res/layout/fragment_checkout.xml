@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@id/toolbarAddresses" />
 
     <EditText
-        android:id="@+id/edAddressTitle"
+        android:id="@+id/edAddress"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:background="@drawable/white_background"
@@ -87,25 +87,8 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
         app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@+id/edAddressTitle"
+        app:layout_constraintTop_toBottomOf="@+id/edAddress"
         android:layout_marginTop="15dp"/>
-
-    <EditText
-        android:id="@+id/edStreet"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/white_background"
-        android:fontFamily="@font/poppins_light"
-        android:gravity="start|center_vertical"
-        android:hint="Street"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:singleLine="true"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/guideline2"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@id/edFullName" />
 
     <LinearLayout
         android:id="@+id/linear"
@@ -115,68 +98,54 @@
         app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintTop_toBottomOf="@+id/edPhone"
-        android:orientation="horizontal">
+        android:orientation="horizontal"/>
 
-        <EditText
-            android:id="@+id/edCity"
-            android:layout_width="378dp"
-            android:layout_height="48dp"
-            android:background="@drawable/white_background"
-            android:fontFamily="@font/poppins_light"
-            android:gravity="start|center_vertical"
-            android:hint="City"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:singleLine="true"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:layout_marginEnd="5dp" />
-
-        <EditText
-            android:id="@+id/edState"
-            android:layout_width="378dp"
-            android:layout_height="48dp"
-            android:background="@drawable/white_background"
-            android:fontFamily="@font/poppins_light"
-            android:gravity="start|center_vertical"
-            android:hint="State"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:singleLine="true"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:layout_marginStart="5dp"/>
-
-    </LinearLayout>
     <EditText
         android:id="@+id/edPhone"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:background="@drawable/white_background"
         android:fontFamily="@font/poppins_light"
-        android:layout_marginTop="10dp"
         android:gravity="start|center_vertical"
         android:hint="Phone"
+        android:layout_marginTop="15dp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:phoneNumber="true"
         android:singleLine="true"
         android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/edFullName"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toBottomOf="@+id/edStreet"
-        tools:ignore="Deprecated" />
+        tools:ignore="Deprecated"
+        tools:layout_editor_absoluteY="274dp" />
 
-
+    <TextView
+        android:id="@+id/tvCheckoutPrice"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="Price"
+        android:textColor="#E30019"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintBottom_toTopOf="@id/buttonSave"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintHorizontal_bias="0"
+        android:textStyle="bold"
+        app:layout_constraintWidth_percent="0.7" />
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonSave"
         android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_marginTop="120dp"
         android:background="@drawable/blue_background"
-        android:text="Save"
+        android:text="Create Order"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="20sp"

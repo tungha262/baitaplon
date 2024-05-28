@@ -89,6 +89,8 @@ class CartAdapter(private val context: Context, private val products: MutableLis
         }
     }
 
+
+
     private fun Int?.formatPrice(): String {
         val price = this.toString()
         val stringBuilder = StringBuilder()

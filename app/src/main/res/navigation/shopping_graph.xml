@@ -10,15 +10,16 @@
         android:name="com.example.baitaplon.fragments.shopping.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/action_homeFragment_to_productDetails"
-            app:destination="@id/productDetails" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.baitaplon.fragments.shopping.CartFragment"
         android:label="CartFragment"
-        tools:layout="@layout/fragment_cart"/>
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/action_cartFragment_to_checkoutFragment"
+            app:destination="@id/checkoutFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.baitaplon.fragments.shopping.ProfileFragment"
@@ -34,8 +35,8 @@
         android:label="fragment_profile_detail"
         tools:layout="@layout/fragment_profile_detail" />
     <fragment
-        android:id="@+id/productDetails"
-        android:name="com.example.baitaplon.fragments.shopping.ProductDetails"
-        android:label="ProductDetails"
-        tools:layout="@layout/fragment_product_details"/>
+        android:id="@+id/checkoutFragment"
+        android:name="com.example.baitaplon.fragments.shopping.CheckoutFragment"
+        android:label="CheckoutFragment"
+        tools:layout="@layout/fragment_checkout" />
 </navigation>

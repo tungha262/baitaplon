@@ -21,6 +21,8 @@ class ServerService(context: Context) {
     private val addToCartEndpoint = "add_to_shopping_cart"
     private val getProductByEmail = "getProductByEmail"
     private val removeProduct = "removeProductByID"
+    private val createOrderURL = "insertOrder"
+    private val updateOrderURL = "updateOrderByID"
     private val requestQueue: RequestQueue = Volley.newRequestQueue(context)
     fun createAccount(postData: JSONObject, callback: ServerCallback){
         val url = API_URL + insertAccount
@@ -149,6 +151,51 @@ class ServerService(context: Context) {
             }
         }
 
+        requestQueue.add(jsonObjectRequest)
+    }
+
+    fun createOrder(postData: JSONObject, callback: ServerCallback){
+        val url = API_URL + createOrderURL
+        val jsonObjectRequest = object : JsonObjectRequest(
+            Method.POST, url, postData,
+            Response.Listener { response ->
+                callback.onSuccess(response)
+            },
+            Response.ErrorListener { error ->
+                callback.onError(error)
+                Log.e(TAG, "Error: ${error.toString()}")
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): MutableMap<String, String> {
+                return mutableMapOf("Content-Type" to "application/json")
+            }
+        }
+        requestQueue.add(jsonObjectRequest)
+    }
+
+    fun updateOrder(token: String, orderID: Int, callback: ServerCallback){
+        val url = "$API_URL$updateOrderURL/$orderID"
+        val postData = JSONObject().apply {
+            put("token", token)
+        }
+
+        // Tạo request
+        val jsonObjectRequest = object : JsonObjectRequest(
+            Method.PUT, url, postData,
+            Response.Listener { response ->
+                callback.onSuccess(response)
+            },
+            Response.ErrorListener { error ->
+                callback.onError(error)
+                Log.e(TAG, "Error: ${error.toString()}")
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): MutableMap<String, String> {
+                return mutableMapOf("Content-Type" to "application/json")
+            }
+        }
+
+        // Thêm request vào hàng đợi
         requestQueue.add(jsonObjectRequest)
     }
 

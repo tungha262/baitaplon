@@ -12,7 +12,9 @@ import android.widget.ListView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.android.volley.VolleyError
 import com.example.baitaplon.R
 import com.example.baitaplon.Server.ServerService
@@ -77,6 +79,10 @@ class CartFragment : Fragment(), CartAdapter.CartListener {
                 Log.e("CartFragment", "Error: ${error.toString()}")
             }
         })
+
+        view.findViewById<View>(R.id.buttonCheckout).setOnClickListener{
+            onCheckoutButtonClick()
+        }
         return view
     }
 
@@ -175,7 +181,12 @@ class CartFragment : Fragment(), CartAdapter.CartListener {
             Log.e("CartFragment", "JSON parsing error: ${e.message}")
         }
     }
-
+    private fun onCheckoutButtonClick() {
+        val totalPrice = totalPriceTextView.text.toString()
+        val bundle = Bundle()
+        bundle.putString("totalPrice", totalPrice)
+        findNavController().navigate(R.id.action_cartFragment_to_checkoutFragment, bundle)
+    }
     private fun Int.formatPrice(): String {
         val price = this.toString()
         val stringBuilder = StringBuilder()
