@@ -64,7 +64,6 @@ class CartFragment : Fragment(), CartAdapter.CartListener {
         val currentUser = userManager.getCurrentUser()
         val email = currentUser?.email ?: ""
         Log.d("EmailCart", email)
-        // Gọi phương thức để lấy dữ liệu giỏ hàng từ server
         serverService.getProductByEmail(email, object : ServerService.ServerCallbackArray {
             override fun onSuccess(response: JSONArray) {
                 Log.d("Cart data", "Lay du lieu thanh cong")
@@ -73,7 +72,6 @@ class CartFragment : Fragment(), CartAdapter.CartListener {
             }
 
             override fun onError(error: VolleyError) {
-                // Xử lý khi có lỗi xảy ra
                 progressBar.visibility = View.GONE
                 Log.e("CartFragment", "Email used for request: $email")
                 Toast.makeText(requireContext(), "Failed to load cart items", Toast.LENGTH_SHORT).show()
@@ -185,9 +183,14 @@ class CartFragment : Fragment(), CartAdapter.CartListener {
         for (product in cartItems) {
             totalPrice += product.price!! * product.quantity!!
         }
-        val bundle = Bundle()
-        bundle.putInt("totalPrice", totalPrice)
-        findNavController().navigate(R.id.action_cartFragment_to_checkoutFragment, bundle)
+        if (totalPrice == 0){
+            Toast.makeText(requireContext(), "Giỏ hàng trống", Toast.LENGTH_SHORT).show()
+        }
+        else{
+            val bundle = Bundle()
+            bundle.putInt("totalPrice", totalPrice)
+            findNavController().navigate(R.id.action_cartFragment_to_checkoutFragment, bundle)
+        }
     }
     private fun Int.formatPrice(): String {
         val price = this.toString()
