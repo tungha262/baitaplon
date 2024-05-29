@@ -127,7 +127,6 @@ class CartFragment : Fragment(), CartAdapter.CartListener {
         totalPriceTextView.text = totalPrice.formatPrice()
     }
     private fun addToCart(product: Product) {
-
         val currentUser = userManager.getCurrentUser()
         val email = currentUser?.email ?: ""
         val token = "" // Token mặc định, bạn có thể thay đổi nếu cần

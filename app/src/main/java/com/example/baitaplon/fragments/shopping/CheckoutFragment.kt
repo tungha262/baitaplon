@@ -45,6 +45,7 @@ class CheckoutFragment : Fragment() {
         }
 
         binding.buttonSave.setOnClickListener{
+            binding.buttonSave.startAnimation()
             createOrder()
         }
     }
@@ -58,10 +59,12 @@ class CheckoutFragment : Fragment() {
         if (email != null) {
             if (email.isEmpty() || fullName.isEmpty() || address.isEmpty()|| phoneNumber.isEmpty()) {
                 // Show an error message if any field is empty
-                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                binding.buttonSave.revertAnimation()
+                Toast.makeText(requireContext(), "Hãy điền đầy đủ thông tin", Toast.LENGTH_SHORT).show()
                 return
             }
         }
+
 
         // Create a JSON object with the order data
         val orderData = JSONObject().apply {
@@ -77,12 +80,14 @@ class CheckoutFragment : Fragment() {
             override fun onSuccess(response: JSONObject) {
                 // Handle success response
                 // For example, show a success message
-                Toast.makeText(requireContext(), "Order created successfully", Toast.LENGTH_SHORT).show()
+                binding.buttonSave.revertAnimation()
+                Toast.makeText(requireContext(), "Đơn hàng tạo thành công", Toast.LENGTH_SHORT).show()
             }
 
             override fun onError(error: VolleyError) {
                 // Handle error
                 // For example, show an error message
+                binding.buttonSave.revertAnimation()
                 Toast.makeText(requireContext(), "Error: ${error.message}", Toast.LENGTH_SHORT).show()
             }
         })

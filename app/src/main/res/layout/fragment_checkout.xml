@@ -135,15 +135,15 @@
         app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintBottom_toTopOf="@id/buttonSave"
         android:gravity="center_horizontal"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="25dp"
         app:layout_constraintHorizontal_bias="0"
         android:textStyle="bold"
         app:layout_constraintWidth_percent="0.7" />
-    <androidx.appcompat.widget.AppCompatButton
+    <com.github.leandroborgesferreira.loadingbutton.customViews.CircularProgressButton
         android:id="@+id/buttonSave"
-        android:layout_width="170dp"
+        android:layout_width="220dp"
         android:layout_height="50dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="150dp"
         android:background="@drawable/blue_background"
         android:text="Create Order"
         android:textAllCaps="false"

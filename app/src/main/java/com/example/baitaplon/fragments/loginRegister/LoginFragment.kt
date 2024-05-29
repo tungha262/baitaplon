@@ -69,7 +69,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                         }
                     }
                     is Resource.Error -> {
-                        Toast.makeText(requireContext(), "Tài khoản hoặc mật khẩu không chính xác", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                         binding.buttonLoginLogin.revertAnimation()
                     }
                     else -> Unit

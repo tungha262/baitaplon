@@ -138,11 +138,11 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.github.leandroborgesferreira.loadingbutton.customViews.CircularProgressButton
         android:id="@+id/buttonCheckout"
         style="@style/blueButtonStyle"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
         android:layout_marginTop="25dp"
         android:layout_marginBottom="20dp"
         android:text="Check out"

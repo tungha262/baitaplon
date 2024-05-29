@@ -9,6 +9,7 @@ import com.example.baitaplon.util.RegisterValidation
 import com.example.baitaplon.util.Resource
 import com.example.baitaplon.util.validateEmail
 import com.example.baitaplon.util.validateFirstName
+import com.example.baitaplon.util.validateLastName
 import com.example.baitaplon.util.validatePassword
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -58,7 +59,7 @@ class RegisterViewmodel @Inject constructor(
         }
         else{
             val registerFieldsState= RegisterFieldsState(
-                validateEmail(user.email),validatePassword(password), validateFirstName(user.firstName), validateFirstName(user.lastName)
+                validateEmail(user.email),validatePassword(password), validateFirstName(user.firstName), validateLastName(user.lastName)
             )
             runBlocking {
                 _validation.send(registerFieldsState)
