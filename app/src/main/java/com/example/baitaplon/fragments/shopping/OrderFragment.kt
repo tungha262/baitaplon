@@ -40,7 +40,6 @@ class OrderFragment : Fragment() {
         listView.adapter = orderAdapter
 
         // Tải dữ liệu đơn hàng từ server
-        Log.d("email", userManager.getCurrentUser()!!.email)
         loadOrderData(userManager.getCurrentUser()!!.email)
 
         closeOrdersImageView.setOnClickListener {
@@ -61,7 +60,7 @@ class OrderFragment : Fragment() {
                         val jsonObject = response.getJSONObject(i)
                         val orderLabel = jsonObject.getString("orderLabel")
                         val totalAmount = jsonObject.getInt("totalAmount")
-                        var status = "Đang xử lý"
+                        var status = "Thanh toán thất bại"
                         if (jsonObject.getString("token").isNotEmpty()){
                             status = "Thành công"
                         }
@@ -78,15 +77,12 @@ class OrderFragment : Fragment() {
 
                 if (orderItemList.isEmpty()) {
                     Log.d("OrderFragment", "Empty")
-                    // Nếu danh sách đơn hàng rỗng, hiển thị thông báo "Không có đơn hàng nào"
                     emptyOrdersTextView.visibility = View.VISIBLE
                     listView.visibility = View.GONE
                 } else {
                     Log.d("OrderFragment", "Not Empty")
-                    // Nếu có đơn hàng, hiển thị danh sách và ẩn thông báo
                     emptyOrdersTextView.visibility = View.GONE
                     listView.visibility = View.VISIBLE
-                    // Thông báo cho adapter biết dữ liệu đã thay đổi
                     orderAdapter.notifyDataSetChanged()
                 }
             }

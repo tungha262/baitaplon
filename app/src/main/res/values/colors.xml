@@ -36,4 +36,6 @@
     <color name="blue">#293859</color>
     <color name="lightgrey">#EEEEEE</color>
     <color name="green">#00FF00</color>
+    <color name="red">#FF0000</color>
+    <color name="darkgrey">#535353</color>
 </resources>

@@ -26,8 +26,8 @@ class OrderAdapter(context: Context, private val orderItems: List<OrderItem>) : 
 
         // Đặt dữ liệu vào các view tương ứng
         orderItem?.let {
-            tvProductCartID.text = it.orderLabel  // Đặt mã sản phẩm
-            tvProductCartPrice.text = it.totalAmount.formatPrice() // Đặt giá sản phẩm trực tiếp
+            tvProductCartID.text = "Mã đơn hàng: ${it.orderLabel}"  // Đặt mã sản phẩm
+            tvProductCartPrice.text = "Tổng số tiền: ${it.totalAmount.formatPrice()}đ" // Đặt giá sản phẩm trực tiếp
             tvProductCartStatusOrder.text = it.orderStatus
             if (it.orderStatus == "Thành công") {
                 tvProductCartStatusOrder.setTextColor(context.getColor(R.color.green))

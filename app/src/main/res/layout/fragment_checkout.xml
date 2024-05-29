@@ -141,12 +141,13 @@
         app:layout_constraintWidth_percent="0.7" />
     <com.github.leandroborgesferreira.loadingbutton.customViews.CircularProgressButton
         android:id="@+id/buttonSave"
-        android:layout_width="220dp"
-        android:layout_height="50dp"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
         android:layout_marginTop="150dp"
         android:background="@drawable/blue_background"
-        android:text="Create Order"
+        android:text="Thanh toán bằng VNPay"
         android:textAllCaps="false"
+        android:textStyle="bold"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
