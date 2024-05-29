@@ -24,6 +24,7 @@ class ServerService(context: Context) {
     private val createOrderURL = "insertOrder"
     private val updateOrderURL = "updateOrderByID"
     private val clearShoppingCart = "clearShoppingCartByEmail"
+    private val getOrderByEmail = "getOrderByEmail"
     private val requestQueue: RequestQueue = Volley.newRequestQueue(context)
     fun createAccount(postData: JSONObject, callback: ServerCallback){
         val url = API_URL + insertAccount
@@ -223,6 +224,26 @@ class ServerService(context: Context) {
         requestQueue.add(jsonObjectRequest)
     }
 
+
+    fun getOrderByEmail(email: String, callback: ServerCallbackArray){
+        val url = "$API_URL$getOrderByEmail/$email"
+        val jsonArrayRequest = object : JsonArrayRequest(
+            Method.GET, url, null,
+            Response.Listener { response ->
+                callback.onSuccess(response)
+            },
+            Response.ErrorListener { error ->
+                callback.onError(error)
+                Log.e(TAG, "Error: ${error.toString()}")
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): MutableMap<String, String> {
+                return mutableMapOf("Content-Type" to "application/json")
+            }
+        }
+        requestQueue.add(jsonArrayRequest)
+
+    }
     interface ServerCallback {
         fun onSuccess(response: JSONObject)
         fun onError(error: VolleyError)

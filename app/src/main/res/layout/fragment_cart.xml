@@ -65,15 +65,15 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.68" />
-    <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:id="@+id/progressBarShoppingCart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@id/toolbarCart"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+<!--    <com.google.android.material.progressindicator.LinearProgressIndicator-->
+<!--        android:id="@+id/progressBarShoppingCart"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:indeterminate="true"-->
+<!--        android:visibility="visible"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/toolbarCart"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
     <ListView
         android:id="@+id/lvCart"
         android:layout_width="0dp"

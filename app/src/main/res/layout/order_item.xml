@@ -22,14 +22,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvProductCartID"
+            android:id="@+id/tvOrderLabel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="9dp"
             android:layout_marginTop="3dp"
             android:layout_marginLeft="8dp"
             android:fontFamily="@font/poppins_light"
-            android:text="Product ID"
+            android:text="Order Label"
             android:textColor="@color/black"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -39,7 +39,7 @@
             app:layout_constraintWidth_percent="0.7" />
 
         <TextView
-            android:id="@+id/tvProductCartPrice"
+            android:id="@+id/tvTotalAmount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="9dp"
@@ -50,7 +50,7 @@
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/imageCartProduct"
-            app:layout_constraintTop_toBottomOf="@id/tvProductCartID"
+            app:layout_constraintTop_toBottomOf="@id/tvOrderLabel"
             app:layout_constraintWidth_percent="0.7" />
 
         <TextView
@@ -60,11 +60,12 @@
             android:layout_marginStart="9dp"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/poppins_light"
+            android:textColor="#FFA500"
             android:text="Status Order"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/imageCartProduct"
-            app:layout_constraintTop_toBottomOf="@id/tvProductCartPrice"
+            app:layout_constraintTop_toBottomOf="@id/tvTotalAmount"
             app:layout_constraintWidth_percent="0.7" />
 
 

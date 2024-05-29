@@ -20,17 +20,35 @@ class OrderAdapter(context: Context, private val orderItems: List<OrderItem>) : 
         val orderItem = getItem(position)
 
         // ánh xa
-        val tvProductCartID = view.findViewById<TextView>(R.id.tvProductCartID)
-        val tvProductCartPrice = view.findViewById<TextView>(R.id.tvProductCartPrice)
+        val tvProductCartID = view.findViewById<TextView>(R.id.tvOrderLabel)
+        val tvProductCartPrice = view.findViewById<TextView>(R.id.tvTotalAmount)
         val tvProductCartStatusOrder = view.findViewById<TextView>(R.id.tvProductCartStatusOrder)
 
         // Đặt dữ liệu vào các view tương ứng
         orderItem?.let {
-            tvProductCartID.text = it.productId  // Đặt mã sản phẩm
-            tvProductCartPrice.text = it.price.toString() // Đặt giá sản phẩm trực tiếp
-            tvProductCartStatusOrder.text = it.statusOrder  // Đặt trạng thái đơn hàng
+            tvProductCartID.text = it.orderLabel  // Đặt mã sản phẩm
+            tvProductCartPrice.text = it.totalAmount.formatPrice() // Đặt giá sản phẩm trực tiếp
+            tvProductCartStatusOrder.text = it.orderStatus
+            if (it.orderStatus == "Thành công") {
+                tvProductCartStatusOrder.setTextColor(context.getColor(R.color.green))
+            }
         }
-
         return view
     }
+}
+
+private fun Int?.formatPrice(): String {
+    val price = this.toString()
+    val stringBuilder = StringBuilder()
+    val n = price.length
+    var count = 0
+    for (i in n - 1 downTo 0) {
+        stringBuilder.append(price[i])
+        count++
+        if (count == 3 && i != 0) {
+            stringBuilder.append('.')
+            count = 0
+        }
+    }
+    return stringBuilder.reverse().toString()
 }

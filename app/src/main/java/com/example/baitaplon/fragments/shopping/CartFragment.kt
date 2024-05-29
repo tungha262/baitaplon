@@ -46,8 +46,8 @@ class CartFragment : Fragment(), CartAdapter.CartListener {
         userManager = UserManager
         serverService = ServerService(requireContext())
 
-        val progressBar = view.findViewById<ProgressBar>(R.id.progressbarCart)
-        progressBar.visibility = View.VISIBLE
+//        val progressBar = view.findViewById<ProgressBar>(R.id.progressbarCart)
+//        progressBar.visibility = View.GONE
 
         listView = view.findViewById(R.id.lvCart)
         totalPriceTextView = view.findViewById(R.id.tvTotalPrice)
@@ -68,11 +68,11 @@ class CartFragment : Fragment(), CartAdapter.CartListener {
             override fun onSuccess(response: JSONArray) {
                 Log.d("Cart data", "Lay du lieu thanh cong")
                 handleCartItemsResponse(response)
-                progressBar.visibility = View.GONE
+//                progressBar.visibility = View.GONE
             }
 
             override fun onError(error: VolleyError) {
-                progressBar.visibility = View.GONE
+//                progressBar.visibility = View.GONE
                 Log.e("CartFragment", "Email used for request: $email")
                 Toast.makeText(requireContext(), "Failed to load cart items", Toast.LENGTH_SHORT).show()
             }

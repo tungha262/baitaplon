@@ -25,6 +25,7 @@ class CheckoutFragment : Fragment() {
     private lateinit var serverService: ServerService
     private lateinit var userManager: UserManager
     private var totalPrice: String? = null
+    private var totalPriceTmp : Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +40,8 @@ class CheckoutFragment : Fragment() {
         serverService = ServerService(requireContext())
         userManager = UserManager
 
-        totalPrice = (arguments?.getInt("totalPrice") ?: 0).toString()
+        totalPrice = (arguments?.getInt("totalPrice") ?: 0).formatPrice()
+        totalPriceTmp = arguments?.getInt("totalPrice")
         Log.d("Check", "totalPrice: $totalPrice")
         binding.tvCheckoutPrice.text = totalPrice
         binding.imageAddressClose.setOnClickListener {
@@ -71,7 +73,7 @@ class CheckoutFragment : Fragment() {
             put("fullName", fullName)
             put("address", address)
             put("phoneNumber", phoneNumber)
-            put("totalAmount", totalPrice?.toInt())
+            put("totalAmount", totalPriceTmp)
             put("token","")
         }
 
@@ -97,4 +99,20 @@ class CheckoutFragment : Fragment() {
             }
         })
     }
+}
+
+private fun Int?.formatPrice(): String {
+    val price = this.toString()
+    val stringBuilder = StringBuilder()
+    val n = price.length
+    var count = 0
+    for (i in n - 1 downTo 0) {
+        stringBuilder.append(price[i])
+        count++
+        if (count == 3 && i != 0) {
+            stringBuilder.append('.')
+            count = 0
+        }
+    }
+    return stringBuilder.reverse().toString()
 }
