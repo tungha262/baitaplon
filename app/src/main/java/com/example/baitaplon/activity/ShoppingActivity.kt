@@ -32,9 +32,5 @@ class ShoppingActivity : AppCompatActivity() {
         }
 
     }
-    override fun onDestroy() {
-        super.onDestroy()
-        UserManager.clearCurrentUser()
-    }
 
 }
