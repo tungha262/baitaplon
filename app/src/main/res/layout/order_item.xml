@@ -22,37 +22,22 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvProductCartName"
+            android:id="@+id/tvProductCartID"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="9dp"
             android:layout_marginTop="3dp"
+            android:layout_marginLeft="8dp"
             android:fontFamily="@font/poppins_light"
-            android:text="Name Product"
+            android:text="Product ID"
             android:textColor="@color/black"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:layout_marginLeft="8dp"
             app:layout_constraintStart_toEndOf="@id/imageCartProduct"
             app:layout_constraintTop_toTopOf="@id/imageCartProduct"
             android:lines="1"
             app:layout_constraintWidth_percent="0.7" />
 
-        <TextView
-            android:id="@+id/tvProductCartQuantity"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="9dp"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/poppins_light"
-            android:text="Quantity"
-            android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@id/imageCartProduct"
-            app:layout_constraintTop_toBottomOf="@id/tvProductCartName"
-
-            app:layout_constraintHorizontal_bias="0"
-            android:textStyle="bold"
-            app:layout_constraintWidth_percent="0.7" />
         <TextView
             android:id="@+id/tvProductCartPrice"
             android:layout_width="0dp"
@@ -63,10 +48,23 @@
             android:text="Price"
             android:textColor="#E30019"
             android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@id/imageCartProduct"
-            app:layout_constraintTop_toBottomOf="@id/tvProductCartQuantity"
-            app:layout_constraintHorizontal_bias="0"
             android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/imageCartProduct"
+            app:layout_constraintTop_toBottomOf="@id/tvProductCartID"
+            app:layout_constraintWidth_percent="0.7" />
+
+        <TextView
+            android:id="@+id/tvProductCartStatusOrder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="Status Order"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/imageCartProduct"
+            app:layout_constraintTop_toBottomOf="@id/tvProductCartPrice"
             app:layout_constraintWidth_percent="0.7" />
 
 

@@ -52,5 +52,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             bundle.putParcelable("user", user)
             findNavController().navigate(R.id.action_profileFragment_to_profileDetailFragment, bundle)
         }
+        binding.tvAllOrders.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_orderFragment)
+        }
+
     }
 }

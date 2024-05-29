@@ -56,7 +56,6 @@ class CheckoutFragment : Fragment() {
         val address = binding.edAddress.text.toString()
         val phoneNumber = binding.edPhone.text.toString()
         val email = userManager.getCurrentUser()?.email
-
         // Validate input fields
         if (email != null) {
             if (email.isEmpty() || fullName.isEmpty() || address.isEmpty()|| phoneNumber.isEmpty()) {
@@ -65,7 +64,6 @@ class CheckoutFragment : Fragment() {
                 return
             }
         }
-
         // Create a JSON object with the order data
         val orderData = JSONObject().apply {
             put("orderLabel", orderLabel)
@@ -76,7 +74,6 @@ class CheckoutFragment : Fragment() {
             put("totalAmount", totalPrice?.toInt())
             put("token","")
         }
-
 
         serverService.createOrder(orderData, object : ServerService.ServerCallback {
             override fun onSuccess(response: JSONObject) {
