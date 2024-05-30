@@ -26,6 +26,7 @@ class ServerService(context: Context) {
     private val clearShoppingCart = "clearShoppingCartByEmail"
     private val getOrderByEmail = "getOrderByEmail"
     private val payment = "payment"
+    private val getOrderByLabel = "getOrderByLabel"
     private val requestQueue: RequestQueue = Volley.newRequestQueue(context)
     fun createAccount(postData: JSONObject, callback: ServerCallback){
         val url = API_URL + insertAccount
@@ -249,8 +250,6 @@ class ServerService(context: Context) {
     fun paymentProcess(amount : Int, orderLabel : String, callback: ServerCallback){
         val amountAndOrderLabel = "$amount" + "_" + orderLabel
         val url = "$API_URL$payment/$amountAndOrderLabel"
-        Log.d(TAG, "URL: $url")
-        Log.d("amountAndOrderLabel", amountAndOrderLabel)
         val postData = JSONObject().apply {
             put("amountAndOrderLabel", amountAndOrderLabel)
         }
@@ -269,6 +268,24 @@ class ServerService(context: Context) {
             }
         }
 
+        requestQueue.add(jsonObjectRequest)
+    }
+
+    fun getOrderByLabel(orderLabel: String, callback: ServerCallback){
+        val url = "$API_URL$getOrderByLabel/$orderLabel"
+        val jsonObjectRequest = object : JsonObjectRequest(
+            Method.GET, url, null,
+            Response.Listener { response ->
+                callback.onSuccess(response)
+            },
+            Response.ErrorListener { error ->
+                callback.onError(error)
+                Log.e(TAG, "Error: ${error.toString()}")
+            }) {
+            override fun getHeaders(): MutableMap<String, String> {
+                return mutableMapOf("Content-Type" to "application/json")
+            }
+        }
         requestQueue.add(jsonObjectRequest)
     }
     interface ServerCallback {

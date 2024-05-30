@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.navigation.fragment.findNavController
 import com.android.volley.VolleyError
 import com.example.baitaplon.R
@@ -30,7 +31,8 @@ class CheckoutFragment : Fragment() {
     private lateinit var userManager: UserManager
     private var totalPrice: String? = null
     private var totalPriceTmp: Int? = null
-    private var imageLink : String ?= null
+    private var imageLink: String? = null
+    private var orderLabel: String? = null
 
     companion object {
         private const val PAYMENT_REQUEST_CODE = 1001
@@ -68,7 +70,7 @@ class CheckoutFragment : Fragment() {
     private fun createOrder() {
         val currentDateTime = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS")
-        val orderLabel = currentDateTime.format(formatter)
+        orderLabel = currentDateTime.format(formatter)
         val fullName = binding.edFullName.text.toString()
         val address = binding.edAddress.text.toString()
         val phoneNumber = binding.edPhone.text.toString()
@@ -97,52 +99,82 @@ class CheckoutFragment : Fragment() {
         Log.d("OrderData", "Order data: $orderData")
         serverService.createOrder(orderData, object : ServerService.ServerCallback {
             override fun onSuccess(response: JSONObject) {
-                serverService.clearShoppingCart(email!!, object : ServerService.ServerCallback {
-                    override fun onSuccess(response: JSONObject) {
-                        Log.d("ClearShoppingCart", "Thanh cong: $response")
-                    }
+                if (isAdded) {
+                    serverService.clearShoppingCart(email!!, object : ServerService.ServerCallback {
+                        override fun onSuccess(response: JSONObject) {
+                            Log.d("ClearShoppingCart", "Thanh cong: $response")
+                        }
 
-                    override fun onError(error: VolleyError) {
-                        Log.e("ClearShoppingCart", "Loi: ${error.message}")
-                    }
-                })
-                serverService.paymentProcess(totalPriceTmp!!, orderLabel, object : ServerService.ServerCallback {
-                    override fun onSuccess(response: JSONObject) {
-                        val paymentUrl = response.getString("paymentUrl")
-                        Log.d("PaymentUrl", "Payment URL: $paymentUrl")
-                        openPaymentWebView(paymentUrl)
-                    }
+                        override fun onError(error: VolleyError) {
+                            Log.e("ClearShoppingCart", "Loi: ${error.message}")
+                        }
+                    })
 
-                    override fun onError(error: VolleyError) {
-                        Log.e("PaymentUrl", "Error: ${error.message}")
-                    }
+                    serverService.paymentProcess(totalPriceTmp!!, orderLabel!!, object : ServerService.ServerCallback {
+                        override fun onSuccess(response: JSONObject) {
+                            val paymentUrl = response.getString("paymentUrl")
+                            Log.d("PaymentUrl", "Payment URL: $paymentUrl")
+                            openPaymentWebView(paymentUrl)
+                        }
 
-                })
-                val intent = Intent(requireContext(), ShoppingActivity::class.java)
-                startActivity(intent)
-                requireActivity().finish()
+                        override fun onError(error: VolleyError) {
+                            if (isAdded) {
+                                Log.e("PaymentUrl", "Error: ${error.message}")
+                            }
+                        }
+                    })
+                }
             }
 
             override fun onError(error: VolleyError) {
-                Toast.makeText(requireContext(), "Error: ${error.message}", Toast.LENGTH_SHORT).show()
+                if (isAdded) {
+                    Toast.makeText(requireContext(), "Error: ${error.message}", Toast.LENGTH_SHORT).show()
+                }
             }
         })
     }
 
     private fun openPaymentWebView(url: String) {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        val builder = CustomTabsIntent.Builder()
+        val customTabsIntent = builder.build()
         try {
-            startActivity(intent)
+            customTabsIntent.launchUrl(requireContext(), Uri.parse(url))
         } catch (e: ActivityNotFoundException) {
             // Xử lý khi không tìm thấy trình duyệt web
             Toast.makeText(requireContext(), "No web browser found", Toast.LENGTH_SHORT).show()
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PAYMENT_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            findNavController().navigate(R.id.orderFragment)
+    override fun onResume() {
+        super.onResume()
+        // Kiểm tra trạng thái đơn hàng khi người dùng quay lại ứng dụng
+        orderLabel?.let {
+            checkOrderStatus(it)
+        }
+    }
+
+    private fun checkOrderStatus(orderLabel: String) {
+        val email = userManager.getCurrentUser()?.email
+        if (email != null) {
+            serverService.getOrderByLabel(orderLabel, object : ServerService.ServerCallback {
+                override fun onSuccess(response: JSONObject) {
+                    val token = response.getString("token")
+                    if (token.isNotEmpty()) {
+                        // Thanh toán thành công
+                        Toast.makeText(requireContext(), "Payment successful", Toast.LENGTH_SHORT).show()
+                    } else {
+                        // Thanh toán thất bại hoặc chưa thực hiện
+                        Toast.makeText(requireContext(), "Payment failed or pending", Toast.LENGTH_SHORT).show()
+                    }
+                    val intent = Intent(requireContext(), ShoppingActivity::class.java)
+                    startActivity(intent)
+                    requireActivity().finish()
+                }
+
+                override fun onError(error: VolleyError) {
+                    Log.e("CheckOrderStatus", "Error: ${error.message}")
+                }
+            })
         }
     }
 }

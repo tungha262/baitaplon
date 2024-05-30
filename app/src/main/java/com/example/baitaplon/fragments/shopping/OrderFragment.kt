@@ -60,12 +60,9 @@ class OrderFragment : Fragment() {
                         val orderLabel = jsonObject.getString("orderLabel")
                         val totalAmount = jsonObject.getInt("totalAmount")
                         val image = jsonObject.getString("firstOrderImage")
-                        var status = "Thanh toán thất bại"
-                        if (jsonObject.getString("token").isNotEmpty()){
-                            status = "Thành công"
-                        }
+                        val token = jsonObject.getString("token")
 
-                        val orderItem = OrderItem(orderLabel, totalAmount, status, image)
+                        val orderItem = OrderItem(orderLabel, totalAmount, token, image)
                         Log.d("OrderFragment", "Order item: $orderItem")
                         orderItemList.add(orderItem)
                         Log.d("OrderFragment", "Order item: ${orderItemList.size}")
@@ -75,7 +72,7 @@ class OrderFragment : Fragment() {
                     Log.d("Error", e.toString())
                     e.printStackTrace()
                 }
-
+                orderItemList.sortByDescending  { orderItem -> orderItem.orderLabel }
                 if (orderItemList.isEmpty()) {
                     Log.d("OrderFragment", "Empty")
                     emptyOrdersTextView.visibility = View.VISIBLE
