@@ -2,6 +2,8 @@ package com.example.baitaplon.fragments.categories
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -45,14 +47,26 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category){
         recyclerView.layoutManager = layoutManager
         productManager = ProductManager(requireContext())
         loadProducts()
+        binding.searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                loadProducts(searchQuery = s.toString())
+            }
+        })
     }
-    private fun loadProducts() {
+    private fun loadProducts(searchQuery: String = "") {
         productManager.getProducts(object : ProductManager.ProductCallback {
             override fun onProductsLoaded(products: List<Product>) {
                 hideLoading()
                 Log.d("MainCategoryFragment", "Loaded ${products.size} products")
+                val filteredList = products.filter { 
+                    (searchQuery.isEmpty() || it.productName!!.contains(searchQuery, ignoreCase = true))
+                }
                 filteredProduct.clear()
-                filteredProduct.addAll(products)
+                filteredProduct.addAll(filteredList)
                 adt.notifyDataSetChanged()
             }
             override fun onLoadError(error: VolleyError) {
