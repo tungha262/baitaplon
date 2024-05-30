@@ -171,10 +171,9 @@ class CartFragment : Fragment(), CartAdapter.CartListener {
                 emptyCartLayout.visibility = View.GONE
                 listView.visibility = View.VISIBLE
             }
-            cartAdapter.notifyDataSetChanged() // Cập nhật ListView
-            updateTotalPrice() // Cập nhật tổng giá
+            cartAdapter.notifyDataSetChanged()
+            updateTotalPrice()
         } catch (e: JSONException) {
-            // Xử lý ngoại lệ nếu có lỗi khi phân tích dữ liệu JSON
             Log.e("CartFragment", "JSON parsing error: ${e.message}")
         }
     }
@@ -187,8 +186,10 @@ class CartFragment : Fragment(), CartAdapter.CartListener {
             Toast.makeText(requireContext(), "Giỏ hàng trống", Toast.LENGTH_SHORT).show()
         }
         else{
+            val img = cartItems[0].imageLink
             val bundle = Bundle()
             bundle.putInt("totalPrice", totalPrice)
+            bundle.putString("imageLink", img)
             findNavController().navigate(R.id.action_cartFragment_to_checkoutFragment, bundle)
         }
     }

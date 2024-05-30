@@ -30,6 +30,7 @@ class CheckoutFragment : Fragment() {
     private lateinit var userManager: UserManager
     private var totalPrice: String? = null
     private var totalPriceTmp: Int? = null
+    private var imageLink : String ?= null
 
     companion object {
         private const val PAYMENT_REQUEST_CODE = 1001
@@ -51,6 +52,8 @@ class CheckoutFragment : Fragment() {
 
         totalPrice = (arguments?.getInt("totalPrice") ?: 0).formatPrice()
         totalPriceTmp = arguments?.getInt("totalPrice")
+        imageLink = arguments?.getString("imageLink")
+        Log.d("Check", "imageLink: $imageLink")
         Log.d("Check", "totalPrice: $totalPrice")
         binding.tvCheckoutPrice.text = totalPrice
         binding.imageAddressClose.setOnClickListener {
@@ -89,8 +92,9 @@ class CheckoutFragment : Fragment() {
             put("phoneNumber", phoneNumber)
             put("totalAmount", totalPriceTmp)
             put("token", "")
+            put("firstOrderImage", imageLink)
         }
-
+        Log.d("OrderData", "Order data: $orderData")
         serverService.createOrder(orderData, object : ServerService.ServerCallback {
             override fun onSuccess(response: JSONObject) {
                 serverService.clearShoppingCart(email!!, object : ServerService.ServerCallback {

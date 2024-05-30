@@ -120,42 +120,6 @@
             app:layout_constraintStart_toStartOf="@id/guidelineRegisterLeft"
             app:layout_constraintTop_toBottomOf="@id/edPasswordRegister" />
 
-        <ImageView
-            android:id="@+id/facebookRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="@id/guidelineRegisterLeft"
-            app:layout_constraintTop_toBottomOf="@id/buttonRegisterRegister"
-            android:src="@drawable/facebook_login"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Facebook"
-            app:layout_constraintStart_toStartOf="@id/facebookRegister"
-            app:layout_constraintEnd_toEndOf="@id/facebookRegister"
-            app:layout_constraintTop_toTopOf="@id/facebookRegister"
-            app:layout_constraintBottom_toBottomOf="@id/facebookRegister"
-            android:textSize="16dp" />
-
-        <ImageView
-            android:id="@+id/googleRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="@id/guidelineRegisterRight"
-            app:layout_constraintTop_toBottomOf="@id/buttonRegisterRegister"
-            android:src="@drawable/google_login"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Google"
-            app:layout_constraintStart_toStartOf="@id/googleRegister"
-            app:layout_constraintEnd_toEndOf="@id/googleRegister"
-            app:layout_constraintTop_toTopOf="@id/googleRegister"
-            app:layout_constraintBottom_toBottomOf="@id/googleRegister"
-            android:textSize="16dp" />
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineRegisterLeft"
             android:layout_width="wrap_content"

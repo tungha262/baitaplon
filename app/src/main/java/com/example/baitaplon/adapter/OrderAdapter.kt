@@ -9,26 +9,26 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.baitaplon.R
 import com.example.baitaplon.data.OrderItem
+import com.squareup.picasso.Picasso
 
 // Adapter để hiển thị danh sách các mục đơn hàng trong ListView
 class OrderAdapter(context: Context, private val orderItems: List<OrderItem>) : ArrayAdapter<OrderItem>(context, 0, orderItems) {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        // Nếu convertView không tồn tại, inflate nó từ layout order_item.xml
         val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.order_item, parent, false)
 
-        // Lấy đối tượng OrderItem tại vị trí hiện tại
         val orderItem = getItem(position)
 
         // ánh xa
         val tvProductCartID = view.findViewById<TextView>(R.id.tvOrderLabel)
         val tvProductCartPrice = view.findViewById<TextView>(R.id.tvTotalAmount)
         val tvProductCartStatusOrder = view.findViewById<TextView>(R.id.tvProductCartStatusOrder)
-
+        val imgView = view.findViewById<ImageView>(R.id.imageOrderItem)
         // Đặt dữ liệu vào các view tương ứng
         orderItem?.let {
             tvProductCartID.text = "Mã đơn hàng: ${it.orderLabel}"  // Đặt mã sản phẩm
             tvProductCartPrice.text = "Tổng số tiền: ${it.totalAmount.formatPrice()}đ" // Đặt giá sản phẩm trực tiếp
             tvProductCartStatusOrder.text = it.orderStatus
+            Picasso.get().load(orderItem.image).into(imgView)
             if (it.orderStatus == "Thành công") {
                 tvProductCartStatusOrder.setTextColor(context.getColor(R.color.green))
             }

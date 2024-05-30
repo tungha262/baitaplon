@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageCartProduct"
+            android:id="@+id/imageOrderItem"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginStart="16dp"
@@ -33,8 +33,8 @@
             android:textColor="@color/black"
             android:textSize="15sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/imageCartProduct"
-            app:layout_constraintTop_toTopOf="@id/imageCartProduct"
+            app:layout_constraintStart_toEndOf="@id/imageOrderItem"
+            app:layout_constraintTop_toTopOf="@id/imageOrderItem"
             android:lines="1"
             app:layout_constraintWidth_percent="0.7" />
 
@@ -49,7 +49,7 @@
             android:textColor="#E30019"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/imageCartProduct"
+            app:layout_constraintStart_toEndOf="@id/imageOrderItem"
             app:layout_constraintTop_toBottomOf="@id/tvOrderLabel"
             app:layout_constraintWidth_percent="0.7" />
 
@@ -64,7 +64,7 @@
             android:text="Order status"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/imageCartProduct"
+            app:layout_constraintStart_toEndOf="@id/imageOrderItem"
             app:layout_constraintTop_toBottomOf="@id/tvTotalAmount"
             app:layout_constraintWidth_percent="0.7" />
         <View

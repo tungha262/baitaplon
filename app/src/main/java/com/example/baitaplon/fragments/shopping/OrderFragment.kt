@@ -51,7 +51,6 @@ class OrderFragment : Fragment() {
     }
 
     private fun loadOrderData(email: String) {
-        Log.d("Alo?????", "WTF")
         serverService.getOrderByEmail(email, object : ServerService.ServerCallbackArray{
             override fun onSuccess(response: JSONArray) {
                 try{
@@ -60,12 +59,14 @@ class OrderFragment : Fragment() {
                         val jsonObject = response.getJSONObject(i)
                         val orderLabel = jsonObject.getString("orderLabel")
                         val totalAmount = jsonObject.getInt("totalAmount")
+                        val image = jsonObject.getString("firstOrderImage")
                         var status = "Thanh toán thất bại"
                         if (jsonObject.getString("token").isNotEmpty()){
                             status = "Thành công"
                         }
 
-                        val orderItem = OrderItem(orderLabel, totalAmount, status)
+                        val orderItem = OrderItem(orderLabel, totalAmount, status, image)
+                        Log.d("OrderFragment", "Order item: $orderItem")
                         orderItemList.add(orderItem)
                         Log.d("OrderFragment", "Order item: ${orderItemList.size}")
                     }
